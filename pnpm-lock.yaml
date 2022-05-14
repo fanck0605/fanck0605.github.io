@@ -10,6 +10,7 @@ specifiers:
   hexo-renderer-marked: ^5.0.0
   hexo-renderer-stylus: ^2.0.0
   hexo-server: ^3.0.0
+  hexo-theme-fluid: ^1.8.14
   hexo-theme-landscape: ^0.0.3
 
 dependencies:
@@ -22,6 +23,7 @@ dependencies:
   hexo-renderer-marked: 5.0.0
   hexo-renderer-stylus: 2.0.1
   hexo-server: 3.0.0
+  hexo-theme-fluid: 1.8.14
   hexo-theme-landscape: 0.0.3
 
 packages:
@@ -715,6 +717,13 @@ packages:
       serve-static: 1.15.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /hexo-theme-fluid/1.8.14:
+    resolution: {integrity: sha512-MLzNtCjJW/1vlyrwJKAlBTpIdH+ChSvK02tbrlvF9BH2fPg88mt5dv1SlWtPqVxiSBu6V4cWZ6agUsUOWL3YzQ==}
+    engines: {node: '>=8.10.0'}
+    peerDependencies:
+      nunjucks: ^3.0.0
     dev: false
 
   /hexo-theme-landscape/0.0.3:
