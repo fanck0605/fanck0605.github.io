@@ -11,6 +11,11 @@ navbar:
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
+index:
+  slogan:
+    enable: true
+    text: Hey, I'm Chuck Fan, a full-stack developer.
+
 links:
   items:
     - {
