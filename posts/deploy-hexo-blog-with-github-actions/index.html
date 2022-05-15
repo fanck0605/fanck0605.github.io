@@ -24,9 +24,10 @@
 <meta property="og:description" content="毕设也差不多快完工了，大学生活已经进入了尾声。大学四年，多多少少还是学习了不少编程相关的知识，但是一直没有写一些都没有把它们记录下来，还是有些可惜的。 最近也下定决心开始写博客了，记录一下自己的学习历程，也希望能给大家分享一点自己所学的有意思的知识。那么这次就直接从使用 GitHub Actions 部署 Hexo 博客开始吧。 什么是 Hexo?Hexo 是一个基于 Node.js 的静态博客框">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-14T17:41:43.000Z">
-<meta property="article:modified_time" content="2022-05-15T02:27:37.652Z">
+<meta property="article:modified_time" content="2022-05-15T02:49:58.807Z">
 <meta property="article:author" content="Chuck Fan">
 <meta property="article:tag" content="GitHub Actions">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -251,8 +252,8 @@
             
             <div class="markdown-body">
               <p>毕设也差不多快完工了，大学生活已经进入了尾声。大学四年，多多少少还是学习了不少编程相关的知识，但是一直没有写一些都没有把它们记录下来，还是有些可惜的。 最近也下定决心开始写博客了，记录一下自己的学习历程，也希望能给大家分享一点自己所学的有意思的知识。那么这次就直接从<em>使用 GitHub Actions 部署 Hexo 博客</em>开始吧。</p>
-<h2 id="什么是-Hexo"><a href="#什么是-Hexo" class="headerlink" title="什么是 Hexo?"></a>什么是 Hexo?</h2><p><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">Hexo</a> 是一个基于 Node.js 的静态博客框架，Hexo 框架可以根据博文源码（Markdown,EJS等）自动生成静态网页界面，可以直接被托管到 GitHub Pages 上面展示。对于个人而言来说，我觉得将 Markdown 格式的博文放到 Git 仓库中进行版本管理，还是一个非常炫酷的功能，因此这次的博客框架就选择它吧。</p>
-<h2 id="创建-Hexo-项目"><a href="#创建-Hexo-项目" class="headerlink" title="创建 Hexo 项目"></a>创建 Hexo 项目</h2><p> Hexo 的使用方式也是非常简单的，使用 npm 全局安装完 hexo-cli 工具后，通过 <code>hexo init</code>，就能一键创建博客了，然后通过使用 <code>hexo server</code> 即可进行博客的预览。创建博文的话一般使用 <code>hexo new &#39;New Post&#39;</code> 即可。</p>
+<h2 id="什么是-Hexo"><a href="#什么是-Hexo" class="headerlink" title="什么是 Hexo?"></a>什么是 Hexo?</h2><p><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">Hexo</a> 是一个基于 Node.js 的静态博客框架，Hexo 框架可以根据博文源码（Markdown, EJS 等）自动生成静态网页界面，可以直接被托管到 GitHub Pages 上面展示。对于个人而言来说，我觉得将 Markdown 格式的博文放到 Git 仓库中进行版本管理，还是一个非常炫酷的功能，因此这次的博客框架就选择它吧。</p>
+<h2 id="创建-Hexo-项目"><a href="#创建-Hexo-项目" class="headerlink" title="创建 Hexo 项目"></a>创建 Hexo 项目</h2><p>Hexo 的使用方式也是非常简单的，使用 npm 全局安装完 hexo-cli 工具后，通过 <code>hexo init</code>，就能一键创建博客了，然后通过使用 <code>hexo server</code> 即可进行博客的预览。创建博文的话一般使用 <code>hexo new &#39;New Post&#39;</code> 即可。</p>
 <p>如果使用 pnpm 的话，依赖安装尽量使用扁平方式，可以省去不少麻烦，毕竟有些主题的 package.json 还是不太规范。</p>
 <h2 id="使用-GitHub-Actions-自动部署-GitHub-Pages"><a href="#使用-GitHub-Actions-自动部署-GitHub-Pages" class="headerlink" title="使用 GitHub Actions 自动部署 GitHub Pages"></a>使用 GitHub Actions 自动部署 GitHub Pages</h2><p>GitHub Actions 是 GitHub 提供的 CI&#x2F;CD 工具，对于公开项目，它是免费的，对于博客来说也没有必要使用私有仓库，因此本次选用它来实现博客的自动部署。</p>
 <h3 id="启用-Actions-写权限"><a href="#启用-Actions-写权限" class="headerlink" title="启用 Actions 写权限"></a>启用 Actions 写权限</h3><p>公开的 GitHub 仓库，Actions 是没有写权限的，首先需要对 Actions 的权限进行配置，详见：<a target="_blank" rel="noopener" href="https://github.blog/changelog/2021-04-20-github-actions-control-permissions-for-github_token/">GitHub Actions: Control permissions for GITHUB_TOKEN</a></p>
@@ -261,19 +262,27 @@
 
 <h2 id="修复-Hexo-渲染问题（Workaround）"><a href="#修复-Hexo-渲染问题（Workaround）" class="headerlink" title="修复 Hexo 渲染问题（Workaround）"></a>修复 Hexo 渲染问题（Workaround）</h2><p>最近（2022-05-24）几个版本的 Hexo 项目，使用 <code>hexo init</code> 创建完后，在 Windows 下，不能正常地进行界面渲染（<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/4968">hexojs&#x2F;hexo#4968</a>），经过排查发现是新版本地 <code>stylus</code> 无法正常地编译 <code>.styl</code> 文件导致的。</p>
 <p>最简单的解决方式就是将 <code>stylus</code> 替换成老版的，但是 <code>package.json</code> 中其实并没有手动引入 <code>stylus</code> 依赖，而是通过 <code>hexo-renderer-stylus</code> 间接引入的。在 pnpm 下，可以通过编写 <a target="_blank" rel="noopener" href="https://www.pnpm.cn/pnpmfile">pnpm Hooks</a> 来修改间接引入的依赖版本。代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// .pnpmfile.cjs</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">readPackage</span>(<span class="hljs-params">package, context</span>) &#123;<br>    <span class="hljs-keyword">if</span> (package.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;hexo-renderer-stylus&#x27;</span>) &#123;<br>        package.<span class="hljs-property">dependencies</span> = &#123;<br>            ...package.<span class="hljs-property">dependencies</span>,<br>            <span class="hljs-attr">stylus</span>: <span class="hljs-string">&#x27;0.54.5&#x27;</span><br>        &#125;<br>        context.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;stylus@^0.54.8 =&gt; stylus@0.54.5 in dependencies of hexo-renderer-stylus@v2.0.0&#x27;</span>)<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> package<br>&#125;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>    <span class="hljs-attr">hooks</span>: &#123;<br>        readPackage<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// .pnpmfile.cjs</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">readPackage</span>(<span class="hljs-params">package, context</span>) &#123;<br>  <span class="hljs-keyword">if</span> (package.<span class="hljs-property">name</span> === <span class="hljs-string">&#x27;hexo-renderer-stylus&#x27;</span>) &#123;<br>    package.<span class="hljs-property">dependencies</span> = &#123;<br>      ...package.<span class="hljs-property">dependencies</span>,<br>      <span class="hljs-attr">stylus</span>: <span class="hljs-string">&#x27;0.54.5&#x27;</span>,<br>    &#125;;<br>    context.<span class="hljs-title function_">log</span>(<br>      <span class="hljs-string">&#x27;stylus@^0.54.8 =&gt; stylus@0.54.5 in dependencies of hexo-renderer-stylus@v2.0.0&#x27;</span><br>    );<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> package;<br>&#125;<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">hooks</span>: &#123;<br>    readPackage,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CI-CD/">CI/CD</a>
+                    
+                  </div>
+                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/GitHub-Actions/">GitHub Actions</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
                     
                   </div>
                 
