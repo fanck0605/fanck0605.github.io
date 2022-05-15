@@ -8,7 +8,7 @@ tags:
   - Husky
 ---
 
-前段时间学习 React 的时候其实已经用过 Husky 了，当时就只是知道它是一个 Git Hooks 工具，反正能跑就行吗，也没有纠结其原理。最近在创建 Ant Design Pro 项目的时候，使用了 pnpm 包管理工具，偶然发现它自带的 yorkie 却不能正常安装 Git Hooks，就想到了使用 Husky 代替了 yorkie，顺带学习了一下 Husky 的工作过程， Ant Design Pro 提交了 [Pull Request](https://github.com/ant-design/ant-design-pro/pull/9718)，并且被合并了 🎉。
+前段时间学习 [React](https://reactjs.org/) 的时候其实已经用过 [Husky](https://reactjs.org/) 了，当时就只是知道它是一个 Git Hooks 管理工具，反正能跑就行，也没有纠结其原理。最近，在创建 [Ant Design Pro](https://pro.ant.design/) 项目的时候，使用了 [pnpm](https://pnpm.io/zh/) 包管理工具，发现它自带的 [yorkie](https://www.npmjs.com/package/@umijs/yorkie) 不能正常安装 Git Hooks，就想到了使用 Husky 代替 yorkie，顺带学习了一下 Husky 的工作过程， 也给 Ant Design Pro 提交了 [Pull Request](https://github.com/ant-design/ant-design-pro/pull/9718)，并且顺利合并了 🎉。
 
 ## 什么是 Git Hooks?
 
