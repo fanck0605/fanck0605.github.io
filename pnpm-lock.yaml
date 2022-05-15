@@ -12,6 +12,7 @@ specifiers:
   hexo-server: ^3.0.0
   hexo-theme-fluid: ^1.8.14
   hexo-theme-landscape: ^0.0.3
+  prettier: ^2.6.2
 
 dependencies:
   hexo: 6.2.0
@@ -25,6 +26,7 @@ dependencies:
   hexo-server: 3.0.0
   hexo-theme-fluid: 1.8.14
   hexo-theme-landscape: 0.0.3
+  prettier: 2.6.2
 
 packages:
 
@@ -1238,6 +1240,12 @@ packages:
   /prelude-ls/1.1.2:
     resolution: {integrity: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=}
     engines: {node: '>= 0.8.0'}
+    dev: false
+
+  /prettier/2.6.2:
+    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: false
 
   /pretty-hrtime/1.0.3:

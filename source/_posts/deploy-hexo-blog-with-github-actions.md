@@ -1,18 +1,22 @@
 ---
 title: 使用 GitHub Actions 部署 Hexo 博客
 date: 2022-05-14 17:41:43
-tags: GitHub Actions
+categories:
+  - CI/CD
+tags:
+  - GitHub Actions
+  - Hexo
 ---
 
 毕设也差不多快完工了，大学生活已经进入了尾声。大学四年，多多少少还是学习了不少编程相关的知识，但是一直没有写一些都没有把它们记录下来，还是有些可惜的。 最近也下定决心开始写博客了，记录一下自己的学习历程，也希望能给大家分享一点自己所学的有意思的知识。那么这次就直接从*使用 GitHub Actions 部署 Hexo 博客*开始吧。
 
 ## 什么是 Hexo?
 
-[Hexo](https://github.com/hexojs/hexo) 是一个基于 Node.js 的静态博客框架，Hexo 框架可以根据博文源码（Markdown,EJS等）自动生成静态网页界面，可以直接被托管到 GitHub Pages 上面展示。对于个人而言来说，我觉得将 Markdown 格式的博文放到 Git 仓库中进行版本管理，还是一个非常炫酷的功能，因此这次的博客框架就选择它吧。
+[Hexo](https://github.com/hexojs/hexo) 是一个基于 Node.js 的静态博客框架，Hexo 框架可以根据博文源码（Markdown, EJS 等）自动生成静态网页界面，可以直接被托管到 GitHub Pages 上面展示。对于个人而言来说，我觉得将 Markdown 格式的博文放到 Git 仓库中进行版本管理，还是一个非常炫酷的功能，因此这次的博客框架就选择它吧。
 
 ## 创建 Hexo 项目
 
- Hexo 的使用方式也是非常简单的，使用 npm 全局安装完 hexo-cli 工具后，通过 `hexo init`，就能一键创建博客了，然后通过使用 `hexo server` 即可进行博客的预览。创建博文的话一般使用 `hexo new 'New Post'` 即可。
+Hexo 的使用方式也是非常简单的，使用 npm 全局安装完 hexo-cli 工具后，通过 `hexo init`，就能一键创建博客了，然后通过使用 `hexo server` 即可进行博客的预览。创建博文的话一般使用 `hexo new 'New Post'` 即可。
 
 如果使用 pnpm 的话，依赖安装尽量使用扁平方式，可以省去不少麻烦，毕竟有些主题的 package.json 还是不太规范。
 
@@ -77,21 +81,22 @@ jobs:
 ```javascript
 // .pnpmfile.cjs
 function readPackage(package, context) {
-    if (package.name === 'hexo-renderer-stylus') {
-        package.dependencies = {
-            ...package.dependencies,
-            stylus: '0.54.5'
-        }
-        context.log('stylus@^0.54.8 => stylus@0.54.5 in dependencies of hexo-renderer-stylus@v2.0.0')
-    }
+  if (package.name === 'hexo-renderer-stylus') {
+    package.dependencies = {
+      ...package.dependencies,
+      stylus: '0.54.5',
+    };
+    context.log(
+      'stylus@^0.54.8 => stylus@0.54.5 in dependencies of hexo-renderer-stylus@v2.0.0'
+    );
+  }
 
-    return package
+  return package;
 }
 
 module.exports = {
-    hooks: {
-        readPackage
-    }
-}
+  hooks: {
+    readPackage,
+  },
+};
 ```
-
