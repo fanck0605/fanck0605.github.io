@@ -66,13 +66,13 @@ hexo server
 hexo new 'deploy hexo blog with github actions'
 ```
 
-Markdown 格式的博客将被被生成到了 source/_post/ 文件夹中，可以通过任意编辑器来编写它。
+Markdown 格式的博客将被被生成到了 source/\_post/ 文件夹中，可以通过任意编辑器来编写它。
 
 无需重启 Hexo 服务器，新的文章就可以在浏览器中被自动展示出来。
 
 ## 使用 GitHub Actions 自动部署 GitHub Pages
 
-现在我们的网站只能在本地访问，通过将它部署到 GitHub Pages 上，我们就能在任意位置访问了。本次我们使用 GitHub Actions  来实现 Hexo 博客的自动部署。GitHub Actions 是 GitHub 提供的 CI/CD 工具，对于开源项目，它可以免费无限制的使用。
+现在我们的网站只能在本地访问，通过将它部署到 GitHub Pages 上，我们就能在任意位置访问了。本次我们使用 GitHub Actions 来实现 Hexo 博客的自动部署。GitHub Actions 是 GitHub 提供的 CI/CD 工具，对于开源项目，它可以免费无限制的使用。
 
 ### 上传到 GitHub
 
@@ -171,7 +171,7 @@ jobs:
 
 ### 配置网站根目录
 
-如果你的仓库名称不是 [用户名].github.io 那么你就需要配置 Hexo 的根路径。在 _config.yml 中，将 root 设置为你的仓库名称。
+如果你的仓库名称不是 [用户名].github.io 那么你就需要配置 Hexo 的根路径。在 \_config.yml 中，将 root 设置为你的仓库名称。
 
 ```diff
 root: /hello-hexo
