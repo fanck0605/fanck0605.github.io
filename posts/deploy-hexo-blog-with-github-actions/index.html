@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://blog.lixchk.cn/posts/deploy-hexo-blog-with-github-actions/configure-github-pages.png">
 <meta property="og:image" content="https://blog.lixchk.cn/posts/deploy-hexo-blog-with-github-actions/hexo-blog-in-github-pages.png">
 <meta property="article:published_time" content="2022-05-14T17:41:43.000Z">
-<meta property="article:modified_time" content="2022-05-22T03:50:44.607Z">
+<meta property="article:modified_time" content="2022-05-22T03:54:15.593Z">
 <meta property="article:author" content="Chuck Fan">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="GitHub Actions">
@@ -220,7 +220,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.1k 字
     </span>
   
 
@@ -302,11 +302,14 @@
 <h3 id="启用-GitHub-Actions-写权限"><a href="#启用-GitHub-Actions-写权限" class="headerlink" title="启用 GitHub Actions 写权限"></a>启用 GitHub Actions 写权限</h3><p>公开的 GitHub 仓库，Actions 是没有写权限的，首先需要对 Actions 的权限进行配置，详见：<a target="_blank" rel="noopener" href="https://github.blog/changelog/2021-04-20-github-actions-control-permissions-for-github_token/">GitHub Actions: Control permissions for GITHUB_TOKEN</a></p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/enable-github-actions-write-access.png" srcset="/img/loading.gif" lazyload class="" title="启用 GitHub Actions 写权限">
 
-<h3 id="编写-Actions-脚本"><a href="#编写-Actions-脚本" class="headerlink" title="编写 Actions 脚本"></a>编写 Actions 脚本</h3><p>为了方便代码的编写，我们可以使用 VS Code 打开项目文件夹。</p>
+<h3 id="编写-GitHub-Actions-脚本"><a href="#编写-GitHub-Actions-脚本" class="headerlink" title="编写 GitHub Actions 脚本"></a>编写 GitHub Actions 脚本</h3><p>为了方便代码的编写，我们可以使用 VS Code 打开项目文件夹。</p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/open-hexo-project-with-vscode.png" srcset="/img/loading.gif" lazyload class="" title="使用 VSCode 打开 Hexo 项目">
 
 <p>GitHub 与我们约定，放置在 Git 仓库 <code>.github/workflows</code> 下的 <code>.yml</code> 文件都会被识别为 Actions 脚本。对于 Hexo 博客的部署，我们只需要编写一个 <code>deploy.yml</code> 文件即可。具体如何编写，网上有非常多的教程，就不再赘述了，下面直接放出代码：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">.github/workflows/deploy.yml</span><br><span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">Hexo</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> [ <span class="hljs-string">main</span> ]<br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">deploy:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">project</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Set</span> <span class="hljs-string">up</span> <span class="hljs-string">pnpm</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">pnpm/action-setup@v2</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">version:</span> <span class="hljs-string">latest</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-number">16</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-number">16</span><br>          <span class="hljs-attr">cache:</span> <span class="hljs-string">pnpm</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">install</span> <span class="hljs-string">--shamefully-hoist</span> <span class="hljs-string">--frozen-lockfile</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">Hexo</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">pnpm</span> <span class="hljs-string">build</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">Hexo</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">peaceiris/actions-gh-pages@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">github_token:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.GITHUB_TOKEN</span> <span class="hljs-string">&#125;&#125;</span><br>          <span class="hljs-attr">publish_dir:</span> <span class="hljs-string">./public</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="配置网站根目录"><a href="#配置网站根目录" class="headerlink" title="配置网站根目录"></a>配置网站根目录</h3><p>在 _config.yml 中，将 root 设置为你的仓库名称。(如果你的仓库名称是 [用户名].github.io, 则无需配置 Hexo 的根路径。)</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff">root: /hello-hexo<br></code></pre></td></tr></table></figure>
 
 <p>编写完毕后，可以直接在 VS Code 中，保存 Git 修改，然后 push 到服务器上。</p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/git-operations-with-vscode.png" srcset="/img/loading.gif" lazyload class="" title="使用 VSCode 进行 Git 操作">
@@ -314,16 +317,12 @@
 <p>在 Actions 选项卡中查看部署进度。</p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/github-actions-status.png" srcset="/img/loading.gif" lazyload class="" title="查看 GitHub Actions 状态">
 
-<h3 id="配置网站根目录"><a href="#配置网站根目录" class="headerlink" title="配置网站根目录"></a>配置网站根目录</h3><p>在 _config.yml 中，将 root 设置为你的仓库名称。(如果你的仓库名称是 [用户名].github.io, 则无需配置 Hexo 的根路径。)</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff">root: /hello-hexo<br></code></pre></td></tr></table></figure>
-
 <h3 id="启用-GitHub-Pages"><a href="#启用-GitHub-Pages" class="headerlink" title="启用 GitHub Pages"></a>启用 GitHub Pages</h3><p>部署完成后，将 GitHub Pages 设置为 gh-pages 分支。</p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/configure-github-pages.png" srcset="/img/loading.gif" lazyload class="" title="配置 GitHub Pages">
 
 <p>等待几分钟，GitHub Pages 就能访问了，网站地址为：https:&#x2F;&#x2F;[用户名].github.io&#x2F;[仓库名称]&#x2F;</p>
 <img src="/posts/deploy-hexo-blog-with-github-actions/hexo-blog-in-github-pages.png" srcset="/img/loading.gif" lazyload class="" title="GitHub Pages 上的 Hexo 博客">
 
-<p>保存后，将修改上传到 GitHub 上即可。</p>
 <h2 id="附：修复-Hexo-渲染问题（Workaround）"><a href="#附：修复-Hexo-渲染问题（Workaround）" class="headerlink" title="附：修复 Hexo 渲染问题（Workaround）"></a>附：修复 Hexo 渲染问题（Workaround）</h2><p><strong>2022-05-20 更新：问题已修复，主要是由于 <a target="_blank" rel="noopener" href="https://github.com/isaacs/node-glob">node-glob</a> 无法处理 windows 的路径分隔符导致的。</strong></p>
 <p>最近（2022-05-14）几个版本的 Hexo 项目，使用 <code>hexo init</code> 创建完后，在 Windows 下，不能正常地进行界面渲染（<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/4968">hexojs&#x2F;hexo#4968</a>），经过排查发现是新版本地 <code>stylus</code> 无法正常地编译 <code>.styl</code> 文件导致的。</p>
 <p>最简单的解决方式就是将 <code>stylus</code> 替换成老版的，但是 <code>package.json</code> 中其实并没有手动引入 <code>stylus</code> 依赖，而是通过 <code>hexo-renderer-stylus</code> 间接引入的。在 pnpm 下，可以通过编写 <a target="_blank" rel="noopener" href="https://www.pnpm.cn/pnpmfile">pnpm Hooks</a> 来修改间接引入的依赖版本。代码如下：</p>
