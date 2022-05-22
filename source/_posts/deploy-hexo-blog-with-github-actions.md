@@ -103,7 +103,7 @@ git push -u origin main
 
 ![启用 GitHub Actions 写权限](deploy-hexo-blog-with-github-actions/enable-github-actions-write-access.png)
 
-### 编写 Actions 脚本
+### 编写 GitHub Actions 脚本
 
 为了方便代码的编写，我们可以使用 VS Code 打开项目文件夹。
 
@@ -151,14 +151,6 @@ jobs:
           publish_dir: ./public
 ```
 
-编写完毕后，可以直接在 VS Code 中，保存 Git 修改，然后 push 到服务器上。
-
-![使用 VSCode 进行 Git 操作](deploy-hexo-blog-with-github-actions/git-operations-with-vscode.png)
-
-在 Actions 选项卡中查看部署进度。
-
-![查看 GitHub Actions 状态](deploy-hexo-blog-with-github-actions/github-actions-status.png)
-
 ### 配置网站根目录
 
 在 \_config.yml 中，将 root 设置为你的仓库名称。(如果你的仓库名称是 [用户名].github.io, 则无需配置 Hexo 的根路径。)
@@ -166,6 +158,14 @@ jobs:
 ```diff
 root: /hello-hexo
 ```
+
+编写完毕后，可以直接在 VS Code 中，保存 Git 修改，然后 push 到服务器上。
+
+![使用 VSCode 进行 Git 操作](deploy-hexo-blog-with-github-actions/git-operations-with-vscode.png)
+
+在 Actions 选项卡中查看部署进度。
+
+![查看 GitHub Actions 状态](deploy-hexo-blog-with-github-actions/github-actions-status.png)
 
 ### 启用 GitHub Pages
 
@@ -176,8 +176,6 @@ root: /hello-hexo
 等待几分钟，GitHub Pages 就能访问了，网站地址为：https://[用户名].github.io/[仓库名称]/
 
 ![GitHub Pages 上的 Hexo 博客](deploy-hexo-blog-with-github-actions/hexo-blog-in-github-pages.png)
-
-保存后，将修改上传到 GitHub 上即可。
 
 ## 附：修复 Hexo 渲染问题（Workaround）
 
