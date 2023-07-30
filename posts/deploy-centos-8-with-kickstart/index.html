@@ -24,7 +24,7 @@
 <meta property="og:description" content="最近接手了一个 Kubernetes 部署的工作，需要安装多台 CentOS 设备。安装系统虽然简单，但是耗时耗力，完全就是个体力活。考虑到之后还有装机需求，于是寻找了一下 CentOS 安装的无人值守方案，在这里记录一下。 原理简述手动安装 CentOS 之后，会生成一个名为 &#x2F;root&#x2F;anaconda-ks.cfg 的 Kickstart 文件，通过此文件可以实现 CentOS 安装的无人托">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-30T16:14:43.000Z">
-<meta property="article:modified_time" content="2023-07-30T08:53:16.523Z">
+<meta property="article:modified_time" content="2023-07-30T08:58:48.510Z">
 <meta property="article:author" content="Chuck Fan">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="CentOS">
@@ -242,7 +242,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -294,7 +294,7 @@
 <li>一台可用的 HTTP 服务器</li>
 </ul>
 <h2 id="手动安装-CentOS"><a href="#手动安装-CentOS" class="headerlink" title="手动安装 CentOS"></a>手动安装 CentOS</h2><p>CentOS 安装完全图形化安装，根据自己的需求完成安装。服务器用途，软件包推荐选择 最小安装 -&gt; 标准安装。这样可以保证环境纯净，且够用。</p>
-<h2 id="Kickstart-文件"><a href="#Kickstart-文件" class="headerlink" title="Kickstart 文件"></a>Kickstart 文件</h2><p>完成安装后，你将可以看到一个 <code>/root/anaconda-ks.cfg</code> 文件，根据需求对其进行简单调整。下面展示了一个 Kickstart 文件，它的是为安装 Kubernetes 设计的，并做了一些无法在图形界面调整的配置。</p>
+<h2 id="Kickstart-文件"><a href="#Kickstart-文件" class="headerlink" title="Kickstart 文件"></a>Kickstart 文件</h2><p>完成安装后，你将可以看到一个 <code>/root/anaconda-ks.cfg</code> 文件，根据需求对其进行简单调整。下面展示了一个 Kickstart 文件（千万不要照搬，网卡设备，磁盘设备都有差异，搬过去大概率无法启动），它的是为安装 Kubernetes 设计的，并做了一些无法在图形界面调整的配置。</p>
 <ul>
 <li>安装完毕后自动重启</li>
 <li>关闭 firewalld 和 selinux</li>
@@ -311,7 +311,7 @@
 <p>验证一下服务器可用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl http://localhost/anaconda-ks.cfg<br></code></pre></td></tr></table></figure>
 
-<h2 id="无人值守安装"><a href="#无人值守安装" class="headerlink" title="无人值守安装"></a>无人值守安装</h2><p>安装镜像启动进入 grub 菜单后，根据按 Tab (BIOS) 或 e (EFI)</p>
+<h2 id="无人值守安装"><a href="#无人值守安装" class="headerlink" title="无人值守安装"></a>无人值守安装</h2><p>安装镜像启动进入 grub 菜单后，根据提示按 Tab (BIOS) 或 e (EFI)</p>
 <p>再启动命令中，添加 Kickstart 文件参数：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">inst.ks=http:<span class="hljs-regexp">//</span>kickstart-server-ip/anaconda-ks.cfg<br></code></pre></td></tr></table></figure>
 
