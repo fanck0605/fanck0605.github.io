@@ -33,6 +33,35 @@
   
   
   <entry>
+    <title>在 CentOS 上部署 Kubernetes</title>
+    <link href="/posts/deploy-kubernetes-cluster-on-centos/"/>
+    <url>/posts/deploy-kubernetes-cluster-on-centos/</url>
+    
+    <content type="html"><![CDATA[<p>Kubernetes 是一个非常好用的容器编排工具，但是肯定有不少人被它安装步骤所劝退。Kubernetes 官网虽然无论是对于新手还是老手都有非常详细的文档，但这份文档讲述的安装教程完全没有一个循序渐进的过程（可能是我太菜了），各种链接跳转，导致学习曲线异常陡峭。本文从一个 Kubernetes 初学者的角度记录一下 Kubernetes 的安装过程，不过在此之前你仍应该掌握 Linux 和 Docker 的基础知识，并且已经可以熟练使用它们了。</p><p>咕咕咕。。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>云原生</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Kubernetes</tag>
+      
+      <tag>Docker</tag>
+      
+      <tag>Cloud Native</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Git Hooks 与 Husky</title>
     <link href="/posts/git-hooks-and-husky/"/>
     <url>/posts/git-hooks-and-husky/</url>
