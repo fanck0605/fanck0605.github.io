@@ -24,7 +24,7 @@
 <meta property="og:description" content="最近接手了一个 Kubernetes 部署的工作，需要安装多台 CentOS 设备。安装系统虽然简单，但是耗时耗力，完全就是个体力活。考虑到之后还有装机需求，于是寻找了一下 CentOS 安装的无人值守方案，在这里记录一下。 原理简述手动安装 CentOS 之后，会生成一个名为 &#x2F;root&#x2F;anaconda-ks.cfg 的 Kickstart 文件，通过此文件可以实现 CentOS 安装的无人托">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-30T16:14:43.000Z">
-<meta property="article:modified_time" content="2023-07-30T09:06:29.154Z">
+<meta property="article:modified_time" content="2023-07-30T09:25:29.448Z">
 <meta property="article:author" content="Chuck Fan">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="CentOS">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -297,9 +297,11 @@
 <h2 id="Kickstart-文件"><a href="#Kickstart-文件" class="headerlink" title="Kickstart 文件"></a>Kickstart 文件</h2><p>完成安装后，你将可以看到一个 <code>/root/anaconda-ks.cfg</code> 文件，根据需求对其进行简单调整。下面展示了一个 Kickstart 文件（千万不要照搬，网卡设备，磁盘设备都有差异，搬过去大概率无法启动），它的是为安装 Kubernetes 设计的，并做了一些无法在图形界面调整的配置。</p>
 <ul>
 <li>安装完毕后自动重启</li>
-<li>关闭 firewalld 和 selinux</li>
+<li>关闭 firewalld （Calico 要求，正常使用不建议关闭，服务器容易被黑）</li>
+<li>修改 selinux 为 permissive</li>
 <li>安装时清空所有磁盘的所有分区（注意误删分区！！！）</li>
-<li>不启用 home 和 swap 分区</li>
+<li>不启用 home 分区</li>
+<li>不启用 swap 分区（Kubernetes 要求，正常使用不建议关闭，内存满了容易宕机）</li>
 <li>root 密码为 1</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs kickstart">#version=RHEL8<br># Reboot after installation<br>reboot<br># Use graphical install<br>graphical<br><br>repo --name=&quot;AppStream&quot; --baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/8-stream/AppStream/x86_64/os<br><br>%packages<br>@^minimal-environment<br>@standard<br><br>%end<br><br># Keyboard layouts<br>keyboard --xlayouts=&#x27;cn&#x27;<br># System language<br>lang zh_CN.UTF-8<br><br># Firewall configuration<br>firewall --disabled<br># Network information<br>network  --bootproto=dhcp --device=ens160 --ipv6=auto --activate<br>network  --hostname=k8s-master<br><br># Use network installation<br>url --url=&quot;https://mirrors.tuna.tsinghua.edu.cn/centos/8-stream/BaseOS/x86_64/os&quot;<br><br># SELinux configuration<br>selinux --permissive<br><br># Run the Setup Agent on first boot<br>firstboot --enable<br><br>ignoredisk --only-use=nvme0n1<br>autopart --nohome --noswap<br># Partition clearing information<br>clearpart --all --initlabel<br><br># System timezone<br>timezone Asia/Shanghai --isUtc<br><br># Root password<br>rootpw --iscrypted $6$VM67DM5siXC4Mzvp$HYAwui.f4902tvs8zRFFq21WuW5REVhuRGt2xaj1YMSC0a.yZQ5mczjtMcutFJPub6lORwfBXl9WQAh73hp9b1<br><br>%addon com_redhat_kdump --enable --reserve-mb=&#x27;auto&#x27;<br><br>%end<br><br>%anaconda<br>pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty<br>pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok<br>pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty<br>%end<br></code></pre></td></tr></table></figure>
