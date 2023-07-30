@@ -1,5 +1,5 @@
 ---
-title: CentOS 无人托管安装
+title: CentOS 无人值守安装
 date: 2023-07-30 16:14:43
 categories:
   - 运维
@@ -121,3 +121,11 @@ inst.ks=http://kickstart-server-ip/anaconda-ks.cfg
 ```
 
 继续启动自动完成安装。
+
+## cockpit 控制界面
+
+最后再安利一波 CentOS 自带的 cockpit，非常好用的 Web 管理工具。
+
+```shell
+systemctl enable --now cockpit.socket
+```
