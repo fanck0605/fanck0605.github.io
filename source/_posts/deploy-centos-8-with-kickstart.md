@@ -28,7 +28,7 @@ CentOS 安装完全图形化安装，根据自己的需求完成安装。服务�
 
 ## Kickstart 文件
 
-完成安装后，你将可以看到一个 `/root/anaconda-ks.cfg` 文件，根据需求对其进行简单调整。下面展示了一个 Kickstart 文件，它的是为安装 Kubernetes 设计的，并做了一些无法在图形界面调整的配置。
+完成安装后，你将可以看到一个 `/root/anaconda-ks.cfg` 文件，根据需求对其进行简单调整。下面展示了一个 Kickstart 文件（千万不要照搬，网卡设备，磁盘设备都有差异，搬过去大概率无法启动），它的是为安装 Kubernetes 设计的，并做了一些无法在图形界面调整的配置。
 
 - 安装完毕后自动重启
 - 关闭 firewalld 和 selinux
@@ -112,7 +112,7 @@ curl http://localhost/anaconda-ks.cfg
 
 ## 无人值守安装
 
-安装镜像启动进入 grub 菜单后，根据按 Tab (BIOS) 或 e (EFI)
+安装镜像启动进入 grub 菜单后，根据提示按 Tab (BIOS) 或 e (EFI)
 
 再启动命令中，添加 Kickstart 文件参数：
 
