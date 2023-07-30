@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>CentOS 无人托管安装</title>
+    <link href="/posts/deploy-centos-8-with-kickstart/"/>
+    <url>/posts/deploy-centos-8-with-kickstart/</url>
+    
+    <content type="html"><![CDATA[<p>无人托管安装 CentOS</p><h2 id="Kickstart"><a href="#Kickstart" class="headerlink" title="Kickstart"></a>Kickstart</h2><p>Kickstart 文件内容如下：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#version=RHEL8</span><br><span class="hljs-comment"># Use graphical install</span><br>graphical<br><br>repo <span class="hljs-attribute">--name</span>=<span class="hljs-string">&quot;AppStream&quot;</span> <span class="hljs-attribute">--baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/centos/8-stream/AppStream/x86_64/os<br>repo <span class="hljs-attribute">--name</span>=<span class="hljs-string">&quot;Docker CE Stable - x86_64&quot;</span> <span class="hljs-attribute">--baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/8/x86_64/stable<br><br>%packages<br>@^minimal-environment<br>@standard<br>containerd.io<br><br>%end<br><br><span class="hljs-comment"># Keyboard layouts</span><br>keyboard <span class="hljs-attribute">--xlayouts</span>=<span class="hljs-string">&#x27;cn&#x27;</span><br><span class="hljs-comment"># System language</span><br>lang zh_CN.UTF-8<br><br><span class="hljs-comment"># Firewall configuration</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">firewall </span>--disabled<br><span class="hljs-comment"># Network information</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">network </span> <span class="hljs-attribute">--bootproto</span>=dhcp <span class="hljs-attribute">--device</span>=ens160 <span class="hljs-attribute">--ipv6</span>=auto --activate<span class="hljs-built_in"></span><br><span class="hljs-built_in">network </span> <span class="hljs-attribute">--hostname</span>=k8s-master<br><br><span class="hljs-comment"># Use network installation</span><br>url <span class="hljs-attribute">--url</span>=<span class="hljs-string">&quot;https://mirrors.tuna.tsinghua.edu.cn/centos/8-stream/BaseOS/x86_64/os&quot;</span><br><br><span class="hljs-comment"># SELinux configuration</span><br>selinux --permissive<br><br><span class="hljs-comment"># Run the Setup Agent on first boot</span><br>firstboot --<span class="hljs-built_in">enable</span><br><br>ignoredisk <span class="hljs-attribute">--only-use</span>=nvme0n1<br>autopart --nohome --noswap<br><span class="hljs-comment"># Partition clearing information</span><br>clearpart --all --initlabel<br><br><span class="hljs-comment"># System timezone</span><br>timezone Asia/Shanghai --isUtc<br><br><span class="hljs-comment"># Root password</span><br>rootpw --iscrypted <span class="hljs-variable">$6</span><span class="hljs-variable">$VM67DM5siXC4Mzvp</span><span class="hljs-variable">$HYAwui</span>.f4902tvs8zRFFq21WuW5REVhuRGt2xaj1YMSC0a.yZQ5mczjtMcutFJPub6lORwfBXl9WQAh73hp9b1<br><br>reboot<br><br>%addon com_redhat_kdump --<span class="hljs-built_in">enable</span> <span class="hljs-attribute">--reserve-mb</span>=<span class="hljs-string">&#x27;auto&#x27;</span><br><br>%end<br><br>%anaconda<br>pwpolicy root <span class="hljs-attribute">--minlen</span>=6 <span class="hljs-attribute">--minquality</span>=1 --notstrict --nochanges --notempty<br>pwpolicy<span class="hljs-built_in"> user </span><span class="hljs-attribute">--minlen</span>=6 <span class="hljs-attribute">--minquality</span>=1 --notstrict --nochanges --emptyok<br>pwpolicy luks <span class="hljs-attribute">--minlen</span>=6 <span class="hljs-attribute">--minquality</span>=1 --notstrict --nochanges --notempty<br>%end<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>运维</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>CentOS</tag>
+      
+      <tag>Kickstart</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Git Hooks 与 Husky</title>
     <link href="/posts/git-hooks-and-husky/"/>
     <url>/posts/git-hooks-and-husky/</url>
