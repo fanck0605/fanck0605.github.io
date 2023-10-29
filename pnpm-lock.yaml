@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   hexo-generator-category:
-    specifier: ^1.0.0
-    version: 1.0.0
+    specifier: ^2.0.0
+    version: 2.0.0
   hexo-generator-index:
     specifier: ^3.0.0
     version: 3.0.0
@@ -670,11 +670,11 @@ packages:
       hexo-pagination: 3.0.0
     dev: false
 
-  /hexo-generator-category@1.0.0:
-    resolution: {integrity: sha512-kmtwT1SHYL2ismbGnYQXNtqLFSeTdtHNbJIqno3LKROpCK8ybST5QVXF1bZI9LkFcXV/H8ilt8gfg4/dNNcQQQ==}
-    engines: {node: '>=8.6.0'}
+  /hexo-generator-category@2.0.0:
+    resolution: {integrity: sha512-9OduRBf3WeRDa4BR0kAfRjOVHur7v3fm0NKAwbjUiqULigAdNZVZPO3cHKW2MlBbl/lI5PuWdhQ9zZ99CCCAgQ==}
+    engines: {node: '>=14'}
     dependencies:
-      hexo-pagination: 1.0.0
+      hexo-pagination: 3.0.0
     dev: false
 
   /hexo-generator-index@3.0.0:
@@ -714,11 +714,6 @@ packages:
     engines: {node: '>=12.4.0'}
     dependencies:
       nanocolors: 0.2.13
-    dev: false
-
-  /hexo-pagination@1.0.0:
-    resolution: {integrity: sha512-miEVFgxchPr2qNWxw0JWpJ9R/Yaf7HjHBZVjvCCcqfbsLyYtCvIfJDxcEwz1sDOC/fLzYPqNnhUI73uNxBHRSA==}
-    engines: {node: '>=8.6.0'}
     dev: false
 
   /hexo-pagination@3.0.0:
