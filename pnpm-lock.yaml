@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   hexo:
     specifier: ^6.2.0
@@ -17,8 +21,8 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   hexo-image-link:
-    specifier: ^0.0.3
-    version: 0.0.3
+    specifier: ^0.0.5
+    version: 0.0.5
   hexo-renderer-ejs:
     specifier: ^2.0.0
     version: 2.0.0
@@ -677,8 +681,8 @@ packages:
       sprintf-js: 1.1.2
     dev: false
 
-  /hexo-image-link@0.0.3:
-    resolution: {integrity: sha512-wyCCLzNnjzZCefo102Zrc3sGJIJSvK5TJTgv0pLEb8GRuHunN1De5h57qpbzVF2id4oQmBSIiugGmslG8U9VsA==}
+  /hexo-image-link@0.0.5:
+    resolution: {integrity: sha512-IakmAA0lPATF6iUfHAzYSuZPA6DYLlMj4LTGnT4LeEtmIHjPWsTDgGssPbMJakA47M1vNv5WwiNS3GCtdH2FQw==}
     dev: false
 
   /hexo-log@2.0.0:
