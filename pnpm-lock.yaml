@@ -21,8 +21,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   hexo-image-link:
-    specifier: ^0.0.5
-    version: 0.0.5
+    specifier: ^0.0.6
+    version: 0.0.6
   hexo-renderer-ejs:
     specifier: ^2.0.0
     version: 2.0.0
@@ -683,8 +683,8 @@ packages:
       sprintf-js: 1.1.2
     dev: false
 
-  /hexo-image-link@0.0.5:
-    resolution: {integrity: sha512-IakmAA0lPATF6iUfHAzYSuZPA6DYLlMj4LTGnT4LeEtmIHjPWsTDgGssPbMJakA47M1vNv5WwiNS3GCtdH2FQw==}
+  /hexo-image-link@0.0.6:
+    resolution: {integrity: sha512-/TR3bBwTeu90zWVI6t8Ky33erhZy4dFONWZ/lGWN8qEsGsxvdG/aKYsoLj5ZxvwAWTaS6z6I59lPMdIhDSqw2Q==}
     dev: false
 
   /hexo-log@2.0.0:
