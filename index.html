@@ -58,7 +58,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.lixchk.cn","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"blog.lixchk.cn","root":"/","version":"1.9.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -67,6 +67,8 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+  
+
 
   
 <meta name="generator" content="Hexo 6.2.0"></head>
@@ -100,9 +102,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -112,9 +114,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -124,9 +126,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -136,9 +138,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -148,9 +150,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -160,9 +162,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -170,15 +172,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
           
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -231,16 +234,16 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/python-callback-elimination/" target="_self">
           Python Coroutine 之回调消除
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/python-callback-elimination/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/python-callback-elimination/" target="_self">
         <div>
-          
           现如今， Coroutine 编程也已非常成熟，借助 Coroutine 我们可以编写同步的代码，轻松的实现异步程序，而不必使用回调式异步编程的形式。但在真实的工程化过程中，往往事与愿违，我们不得不面对使用回调编程的老式类库，如何将他们结合到使用 Coroutine 的程序中就变得尤为重要。 本文将阐述使用 asyncio 时，Python 脚本如何消除回调，来让使用回调编程更好的与 Corout
         </div>
       </a>
@@ -302,17 +305,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/deploy-centos-8-with-kickstart/" target="_self">
           CentOS 无人值守安装
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/deploy-centos-8-with-kickstart/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/deploy-centos-8-with-kickstart/" target="_self">
         <div>
-          
-          最近接手了一个 Kubernetes 部署的工作，需要安装多台 CentOS 设备。安装系统虽然简单，但是耗时耗力，完全就是个体力活。考虑到之后还有装机需求，于是寻找了一下 CentOS 安装的无人值守方案，在这里记录一下。 原理简述手动安装 CentOS 之后，会生成一个名为 &#x2F;root&#x2F;anaconda-ks.cfg 的 Kickstart 文件，通过此文件可以实现 CentOS 安装的无人托
+          最近接手了一个 Kubernetes 部署的工作，需要安装多台 CentOS 设备。安装系统虽然简单，但是耗时耗力，完全就是个体力活。考虑到之后还有装机需求，于是寻找了一下 CentOS 安装的无人值守方案，在这里记录一下。 原理简述手动安装 CentOS 之后，会生成一个名为 /root/anaconda-ks.cfg 的 Kickstart 文件，通过此文件可以实现 CentOS 安装的无人托
         </div>
       </a>
 
@@ -367,16 +370,16 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/deploy-kubernetes-cluster-on-centos/" target="_self">
           在 CentOS 上部署 Kubernetes
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/deploy-kubernetes-cluster-on-centos/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/deploy-kubernetes-cluster-on-centos/" target="_self">
         <div>
-          
           Kubernetes 是一个非常好用的容器编排工具，但是肯定有不少人被它安装步骤所劝退。Kubernetes 官网虽然无论是对于新手还是老手都有非常详细的文档，但这份文档讲述的安装教程完全没有一个循序渐进的过程（可能是我太菜了），各种链接跳转，导致学习曲线异常陡峭。本文从一个 Kubernetes 初学者的角度记录一下 Kubernetes 的安装过程，不过在此之前你仍应该掌握 Linux 和 D
         </div>
       </a>
@@ -432,16 +435,16 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/git-hooks-and-husky/" target="_self">
           Git Hooks 与 Husky
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/git-hooks-and-husky/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/git-hooks-and-husky/" target="_self">
         <div>
-          
           前段时间学习 React 的时候其实已经用过 Husky 了，当时就只是知道它是一个 Git Hooks 管理工具，反正能跑就行，也没有纠结其原理。最近，在创建 Ant Design Pro 项目的时候，使用了 pnpm 包管理工具，发现它自带的 yorkie 不能正常安装 Git Hooks，就想到了使用 Husky 代替 yorkie，顺带学习了一下 Husky 的工作过程， 也给 Ant D
         </div>
       </a>
@@ -495,16 +498,16 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/javascript-notes/" target="_self">
           JavaScript 学习心得
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/javascript-notes/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/javascript-notes/" target="_self">
         <div>
-          
           第一次使用 JavaScript 编写代码大概是从大二开始的，当时主要是使用了 ECharts 做了一些简单地数据可视化。如今已经大四快毕业了，学习 JavaScript，断断续续，也有三年之久了，不能说对 JavaScript 十分熟悉，但是也算是小有心得。就简单地给大家分享一下如何去学习 JavaScript。 初出茅庐对于 JavaScript 的初学者，还是首先要对 JavaScript
         </div>
       </a>
@@ -556,16 +559,16 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/posts/deploy-hexo-blog-with-github-actions/" target="_self">
           使用 GitHub Actions 部署 Hexo 博客
         </a>
-      </h1>
+      </h2>
 
-      <a class="index-excerpt" href="/posts/deploy-hexo-blog-with-github-actions/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/deploy-hexo-blog-with-github-actions/" target="_self">
         <div>
-          
           毕设也差不多快完工了，大学生活已经进入了尾声。大学四年，多多少少还是学习了不少编程知识，但是一直没有写一些文章把它们记录下来，还是有些可惜。 最近，终于下定决心开始写博客了，主要是为了记录一下自己的学习历程，也希望能给大家分享一点自己所学的知识。那么这次就直接从使用 GitHub Actions 部署 Hexo 博客开始吧。 什么是 Hexo?Hexo 是一个基于 Node.js 的静态博客框架。
         </div>
       </a>
@@ -689,7 +692,7 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -709,8 +712,6 @@
       
     })(window, document);
   </script>
-
-
 
 
 
