@@ -169,15 +169,14 @@ class HackFinder:
         spec = PathFinder.find_spec(fullname, path, target)
         if spec and spec.origin:
             # 替换 loader 为我们的自定义 loader
-            spec.loader = HackSourceLoader(spec.origin, self.modifier_func)
+            spec.loader = HackSourceLoader(spec.origin)
         return spec
 
 class HackSourceLoader(SourceLoader):
     """自定义 Loader，加载并修改源码"""
     
-    def __init__(self, origin, modifier_func):
+    def __init__(self, origin):
         self.origin = origin
-        self.modifier_func = modifier_func
     
     def get_filename(self, fullname):
         return self.origin
